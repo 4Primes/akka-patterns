@@ -7,7 +7,7 @@ version := "1.0"
 
 organization := "org.cakesolutions"
 
-scalaVersion := "2.10.0-RC3"
+scalaVersion := "2.10.0"
 
 /** Shell */
 shellPrompt := { state => System.getProperty("user.name") + "> " }
@@ -30,25 +30,24 @@ resolvers += "neo4j repo" at "http://m2.neo4j.org/content/repositories/releases/
 resolvers += "neo4j snapshot repo" at "http://m2.neo4j.org/content/groups/public/"
 
 libraryDependencies <<= scalaVersion { scala_version => 
-    val sprayVersion = "1.1-M6"
-    val akkaVersion  = "2.1.0-RC3"
-    val scalazVersion = "7.0.0-M5"
+    val sprayVersion = "1.1-M7"
+    val akkaVersion  = "2.1.0"
+    val scalazVersion = "7.0.0-M7"
     Seq(
-        "com.typesafe.akka"    % "akka-kernel"         % akkaVersion cross CrossVersion.full,
-        "com.typesafe.akka"    % "akka-actor"          % akkaVersion cross CrossVersion.full,
+        "com.typesafe.akka"    % "akka-kernel"         % akkaVersion cross CrossVersion.binary,
+        "com.typesafe.akka"    % "akka-actor"          % akkaVersion cross CrossVersion.binary,
         "io.spray"             % "spray-can"           % sprayVersion,
         "io.spray"             % "spray-routing"       % sprayVersion,
         "io.spray"             % "spray-httpx"         % sprayVersion,
         "io.spray"             % "spray-util"          % sprayVersion,
         "io.spray"             % "spray-client"        % sprayVersion,
         "org.neo4j"            % "neo4j"               % "1.9-M02",
-        "org.scalaz"           % "scalaz-effect"       % scalazVersion cross CrossVersion.full,
-        "org.cakesolutions"    % "scalad_2.10"         % "1.0",
-        "io.spray"             % "spray-json"          % "1.2.3" cross CrossVersion.full,
+        "org.scalaz"           % "scalaz-effect"       % scalazVersion cross CrossVersion.binary,
+        "io.spray"             % "spray-json"          % "1.2.3" cross CrossVersion.binary,
         "javax.mail"           % "mail"                % "1.4.2",
         "org.specs2"           % "classycle"           % "1.4.1" % "test",
-        "com.typesafe.akka"    % "akka-testkit"        % akkaVersion  % "test" cross CrossVersion.full,
-        "org.specs2"           % "specs2"              % "1.12.3" % "test"  cross CrossVersion.full
+        "com.typesafe.akka"    % "akka-testkit"        % akkaVersion  % "test" cross CrossVersion.binary,
+        "org.specs2"           % "specs2"              % "1.12.3" % "test"  cross CrossVersion.binary
     )
 }
 

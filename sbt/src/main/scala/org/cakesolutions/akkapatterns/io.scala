@@ -1,10 +1,11 @@
 package org.cakesolutions.akkapatterns
 
-import akka.actor.{Props, Actor, ActorSystem}
+import akka.actor.{ Props, Actor, ActorSystem }
 import spray.io.IOExtension
 import spray.can.client.HttpClient
 import com.typesafe.config.ConfigFactory
 import spray.client.HttpConduit
+import spray.io.IOBridge
 
 /**
  * Instantiates & provides access to Spray's ``IOBridge``.
@@ -13,12 +14,11 @@ import spray.client.HttpConduit
  */
 trait HttpIO {
   implicit def actorSystem: ActorSystem
-  
-  lazy val ioBridge = IOExtension(actorSystem).ioBridge // new IOBridge(actorSystem).start()
+
+  lazy val ioBridge = IOExtension(actorSystem).ioBridge() // new IOBridge(actorSystem).start()
 
   private lazy val httpClient = actorSystem.actorOf(
-    Props(new HttpClient(ioBridge, ConfigFactory.parseString("spray.can.client.ssl-encryption = on")))
-  )
+    Props(new HttpClient(ioBridge, ConfigFactory.parseString("spray.can.client.ssl-encryption = on"))))
 
   def makeConduit(host: String) =
     actorSystem.actorOf(Props(new HttpConduit(httpClient, host, port = 443, sslEnabled = true)))
@@ -58,4 +58,4 @@ trait ActorAmqpIO extends AmqpIO {
   final implicit def actorSystem = context.system
 
 }
-*/
+*/ 

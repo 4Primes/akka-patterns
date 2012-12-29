@@ -5,6 +5,7 @@
 .classpath
 .settings
 .history
+*.cache
 gen
 **/*.swp
 **/*~.nib
@@ -42,3 +43,5 @@ out/
 provisioning/.vagrant
 provisioning/*/.vagrant
 provisioning/*/*.known
+sbt/akka-patterns-store/
+
